@@ -162,7 +162,7 @@ http {
 }
 EOF
     curl https://get.acme.sh | sh
-    ~/.acme.sh/acme.sh  --issue  -d $your_domain  --standalone
+    ~/.acme.sh/acme.sh  --issue  -d $your_domain -d www.$your_domain --standalone
     ~/.acme.sh/acme.sh  --installcert  -d  $your_domain   \
         --key-file   /etc/nginx/ssl/$your_domain.key \
         --fullchain-file /etc/nginx/ssl/fullchain.cer
