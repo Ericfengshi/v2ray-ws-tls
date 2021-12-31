@@ -50,7 +50,11 @@ if [ "$release" == "centos" ]; then
     red "==============="
     exit
     fi
-    rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm >/dev/null 2>&1
+    if [ -n "$(grep ' 7\.' /etc/redhat-release)" ] ;then
+    	rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm >/dev/null 2>&1
+    else
+	rpm -Uvh http://nginx.org/packages/centos/8/SRPMS/nginx-1.20.2-1.el8.ngx.src.rpm >/dev/null 2>&1
+    fi
     green "开始安装nginx编译依赖"
     yum install -y libtool perl-core zlib-devel gcc pcre* >/dev/null 2>&1
 elif [ "$release" == "ubuntu" ]; then
