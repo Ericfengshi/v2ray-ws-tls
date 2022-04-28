@@ -217,6 +217,12 @@ WantedBy=multi-user.target
 EOF
 chmod 777 /etc/systemd/system/nginx.service
 systemctl enable nginx.service
+# 安装 nginx 网页
+cd /etc/nginx/html
+rm -f ./*
+wget https://github.com/atrandys/v2ray-ws-tls/raw/master/web.zip >/dev/null 2>&1
+unzip web.zip >/dev/null 2>&1
+systemctl restart nginx.service   
 }
 
 #安装nginx
