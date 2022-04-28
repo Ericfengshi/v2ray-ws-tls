@@ -257,7 +257,7 @@ function install_v2ray(){
     bash <(curl -L -s https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 
     cd /usr/local/etc/v2ray/
     rm -f config.json
-    wget https://raw.githubusercontent.com/atrandys/v2ray-ws-tls/master/config.json >/dev/null 2>&1
+    wget https://raw.githubusercontent.com/Ericfengshi/v2ray-ws-tls/master/config.json >/dev/null 2>&1
     v2uuid=$(cat /proc/sys/kernel/random/uuid)
     sed -i "s/aaaa/$v2uuid/;" config.json
     sed -i "s/mypath/$newpath/;" config.json
@@ -274,7 +274,7 @@ cat > /usr/local/etc/v2ray/myconfig.json<<-EOF
 地址：${your_domain}
 端口：443
 uuid：${v2uuid}
-额外id：64
+额外id：0
 加密方式：aes-128-gcm
 传输协议：ws
 别名：myws
@@ -289,7 +289,7 @@ green "===========配置参数============"
 green "地址：${your_domain}"
 green "端口：443"
 green "uuid：${v2uuid}"
-green "额外id：64"
+green "额外id：0"
 green "加密方式：aes-128-gcm"
 green "传输协议：ws"
 green "别名：myws"
