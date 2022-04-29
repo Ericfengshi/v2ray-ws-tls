@@ -254,7 +254,7 @@ function install(){
 function install_v2ray(){
     
     #bash <(curl -L -s https://install.direct/go.sh)  
-    bash <(curl -L -s https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) 
+    bash <(curl -L -s https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --version v4.34.0
     cd /usr/local/etc/v2ray/
     rm -f config.json
     wget https://raw.githubusercontent.com/Ericfengshi/v2ray-ws-tls/master/config.json >/dev/null 2>&1
