@@ -53,10 +53,11 @@ if [ "$release" == "centos" ]; then
     if [ -n "$(grep ' 7\.' /etc/redhat-release)" ] ;then
     	rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm >/dev/null 2>&1
     else
-	rpm -Uvh http://nginx.org/packages/centos/8/SRPMS/nginx-1.20.2-1.el8.ngx.src.rpm >/dev/null 2>&1
+        rpm -Uvh http://nginx.org/packages/centos/8/x86_64/RPMS/nginx-1.24.0-1.el8.ngx.x86_64.rpm >/dev/null 2>&1
     fi
     green "开始安装nginx编译依赖"
-    yum install -y libtool perl-core zlib-devel gcc pcre* >/dev/null 2>&1
+    yum install -y libtool perl-core zlib-devel >/dev/null 2>&1
+    yum install -y gcc pcre --allowerasing >/dev/null 2>&1
 elif [ "$release" == "ubuntu" ]; then
     if  [ -n "$(grep ' 14\.' /etc/os-release)" ] ;then
     red "==============="
@@ -131,9 +132,9 @@ function install_nginx(){
     mkdir /etc/nginx/html
     mkdir /etc/nginx/ssl
     mkdir /etc/nginx/conf.d
-    wget https://nginx.org/download/nginx-1.15.8.tar.gz >/dev/null 2>&1
-    tar xf nginx-1.15.8.tar.gz && rm nginx-1.15.8.tar.gz >/dev/null 2>&1
-    cd nginx-1.15.8
+    wget https://nginx.org/download/nginx-1.24.0.tar.gz >/dev/null 2>&1
+    tar xf nginx-1.24.0.tar.gz && rm nginx-1.24.0.tar.gz >/dev/null 2>&1
+    cd nginx-1.24.0
     ./configure --prefix=/etc/nginx --with-openssl=../openssl-1.1.1a --with-openssl-opt='enable-tls1_3' --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-http_sub_module --with-stream --with-stream_ssl_module  >/dev/null 2>&1
     green "开始编译安装nginx，编译等待时间可能较长，请耐心等待，通常需要几到十几分钟"
     sleep 3s
@@ -256,7 +257,7 @@ function install(){
 function install_v2ray(){
     
     #bash <(curl -L -s https://install.direct/go.sh)  
-    bash <(curl -L -s https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --version v4.34.0
+    bash <(curl -L -s https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh) --version v5.3.0
     cd /usr/local/etc/v2ray/
     rm -f config.json
     wget https://raw.githubusercontent.com/Ericfengshi/v2ray-ws-tls/master/config.json >/dev/null 2>&1
@@ -319,7 +320,7 @@ function start_menu(){
     clear
     green " ==============================================="
     green " Info       : onekey script install v2ray+ws+tls        "
-    green " OS support : centos7/debian9+/ubuntu16.04+                       "
+    green " OS support : centos7+/debian9+/ubuntu16.04+                       "
     green " Author     : A                     "
     green " ==============================================="
     echo
